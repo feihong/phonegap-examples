@@ -1,0 +1,11 @@
+body {
+  background-color: moccasin;
+}
+
+#content {
+  margin-top: 3em;
+  font-size: 1.5em;
+  text-align: center;
+  border: 1px dashed gray;
+  background-color: khaki;
+}

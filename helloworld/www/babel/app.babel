@@ -1,0 +1,35 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+
+const MESSAGES = [
+  'Hola Mundo',
+  'ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਦੁਨਿਆ',
+  'こんにちは世界',
+  '你好世界',
+  'Hello World',
+]
+
+
+class HelloWorld extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {messageIndex: 0}
+  }
+  render() {
+    return <div>
+      <h1>{MESSAGES[this.state.messageIndex]}</h1>
+      <div>{this.state.messageIndex}</div>
+      <button onClick={this.handleClick.bind(this)}>Click me</button>
+    </div>
+  }
+  handleClick() {
+    let newIndex = (this.state.messageIndex + 1) % MESSAGES.length
+    this.setState({messageIndex: newIndex})
+  }
+}
+
+ReactDOM.render(
+  <HelloWorld />,
+  document.getElementById('content')
+)
