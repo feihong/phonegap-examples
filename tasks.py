@@ -2,6 +2,14 @@ from invoke import run, task
 
 
 @task
+def serve(projectname):
+    run("""
+    cd %(proj)s
+    phonegap serve
+    """ % {'proj': projectname})
+
+
+@task
 def build(projectname):
     run("""browserify --extension=.babel \
       %(proj)s/www/babel/app.babel \
