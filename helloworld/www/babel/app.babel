@@ -19,12 +19,12 @@ class HelloWorld extends React.Component {
   render() {
     return <div>
       <h1>{MESSAGES[this.state.messageIndex]}</h1>
-      <div>{this.state.messageIndex}</div>
       <button onClick={this.handleClick.bind(this)}>Click me</button>
     </div>
   }
   handleClick() {
     let newIndex = (this.state.messageIndex + 1) % MESSAGES.length
+    console.log(this.state.messageIndex)
     this.setState({messageIndex: newIndex})
   }
 }
