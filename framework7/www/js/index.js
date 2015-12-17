@@ -1,5 +1,3 @@
-document.addEventListener("deviceready", function() {
-//=============================================================================
 var myApp = new Framework7({
   modalTitle: 'This is a modal'
 })
@@ -33,8 +31,5 @@ function initIndexPage() {
   $$('.uuid').html(device.uuid)
 }
 
-// myApp.onPageInit doesn't work for the initial page
-initIndexPage()
-
-//=============================================================================
-}, false)
+// The myApp.onPageInit() handler doesn't run when the app first loads.
+document.addEventListener("deviceready", initIndexPage, false)
