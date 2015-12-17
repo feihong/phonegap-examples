@@ -6,9 +6,10 @@ from invoke import run, task
 @task
 def serve(projectname):
     js_dir = op.join(projectname, 'www/js')
+    babel_file = op.join(projectname, 'www/babel/app.babel')
     if not op.exists(js_dir):
         os.mkdir(js_dir)
-    if not op.exists(op.join(js_dir, 'bundle.js')):
+    if op.exists(babel_file) and not op.exists(op.join(js_dir, 'bundle.js')):
         build(projectname)
     run("""
     cd %(proj)s
