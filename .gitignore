@@ -9,8 +9,8 @@ npm-debug.log
 bundle.js
 
 # Cordova
-/platforms
-/plugins
+*/platforms
+*/plugins
 
 # res
 resources/signing
