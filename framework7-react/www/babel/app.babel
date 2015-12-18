@@ -1,0 +1,81 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+
+let myApp = new Framework7({
+  modalTitle: 'This is a modal'
+})
+
+let deviceInfo = null
+
+myApp.addView('.view-main', {
+  dynamicNavbar: true
+})
+
+class CoolApp extends React.Component {
+  render() {
+    return <div>
+      <div className="content-block">
+        <p>Welcome to Framework7 with React</p>
+        <a href="#" className="button alert-button" onClick={this.handleClick}>Click me</a>
+      </div>
+      <div className="content-block-title">Device details</div>
+      <div className="list-block">
+        <ul>{this.renderListItems()}</ul>
+      </div>
+      <div className="content-block-title">More details</div>
+      <div className="content-block">
+        <div className="content-block-inner">
+          <p><b>UUID</b>: {device.uuid}</p>
+          <p><b>User agent</b>: {navigator.userAgent}</p>
+        </div>
+      </div>
+    </div>
+  }
+  renderListItems() {
+    let results = []
+    Object.keys(deviceInfo).forEach((key) => {
+      results.push(<li>
+        <div className="item-content">
+          <div className="item-inner">
+            <div className="item-title">{key}</div>
+            <div className="item-after">{deviceInfo[key]}</div>
+          </div>
+        </div>
+      </li>)
+    })
+    return results
+  }
+  handleClick() {
+    myApp.alert('Sweet you clicked my button dude')
+  }
+}
+
+function main() {
+  deviceInfo = {
+    'Cordova version': device.cordova,
+    'Platform': device.platform,
+    'Device model': device.model,
+    'Platform version': device.version,
+    'Screen size': `${screen.width}×${screen.height}`,
+  }
+
+  ReactDOM.render(
+    <CoolApp />,
+    document.getElementById('react-content')
+  )
+}
+
+let isPhoneGap = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) !== null
+if (isPhoneGap) {
+  document.addEventListener('deviceready', main, false)
+} else {
+  window.device = {
+    cordova: '666.66',
+    platform: 'Browser',
+    model: 'ChromeFoxie',
+    version: '99',
+    uuid: 'THX-1138',
+  }
+  main()
+}
