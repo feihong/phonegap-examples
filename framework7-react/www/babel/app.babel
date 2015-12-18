@@ -13,22 +13,32 @@ myApp.addView('.view-main', {
 })
 
 class CoolApp extends React.Component {
+  componentDidMount() {
+
+  }
   render() {
     return <div>
-      <div className="content-block">
-        <p>Welcome to Framework7 with React</p>
-        <a href="#" className="button alert-button" onClick={this.handleClick}>Click me</a>
-      </div>
       <div className="content-block-title">Device details</div>
-      <div className="list-block">
-        <ul>{this.renderListItems()}</ul>
+      <div className="list-block accordion-list">
+        <ul>
+          {this.renderListItems()}
+          <li className="accordion-item">
+            <a href="#" className="item-link item-content">
+              <div className="item-inner">
+                <div className="item-title">More details</div>
+              </div>
+            </a>
+            <div className="accordion-item-content">
+              <div className="content-block">
+                <p><b>UUID</b>: {device.uuid}</p>
+                <p><b>User agent</b>: {navigator.userAgent}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
-      <div className="content-block-title">More details</div>
       <div className="content-block">
-        <div className="content-block-inner">
-          <p><b>UUID</b>: {device.uuid}</p>
-          <p><b>User agent</b>: {navigator.userAgent}</p>
-        </div>
+        <a href="#" className="button alert-button" onClick={this.handleClick}>For a good time, click me</a>
       </div>
     </div>
   }
