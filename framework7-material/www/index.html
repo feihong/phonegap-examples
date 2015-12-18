@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Framework7 Example</title>
+<link rel="stylesheet" href="css/framework7.material.min.css">
+<link rel="stylesheet" href="css/framework7.material.colors.min.css">
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<div class="statusbar-overlay"></div>
+<div class="panel-overlay"></div>
+<div class="panel panel-left panel-cover">
+  <div class="content-block">
+    <p>Left panel content goes here</p>
+  </div>
+</div>
+
+<div class="views">
+  <div class="view view-main">
+    <div class="pages navbar-fixed">
+      <div data-page="index" class="page">
+        <div class="navbar">
+          <div clas"navbar-inner">
+            <!-- I'm unable to get the left and center elements to appear together! It works in the kitchen sink demo, though, so it's rather mysterious. -->
+            <!-- <div class="left"><a href="#" class="link open-panel icon-only"><i class="icon icon-bars"></i></a></div> -->
+            <div class="center">Framework7 Example</div>
+            <!-- <div class="right"><a href="#" class="link icon-only"><i class="icon icon-bars"></i></a></div> -->
+          </div>
+        </div>
+        <div class="page-content">
+          <div class="content-block">Press the button to open an alert</div>
+          <div class="content-block">
+            <a href="#" class="button button-raised alert-button">Alert</a>
+          </div>
+          <div class="list-block">
+            <ul class="device-info-list"></ul>
+          </div>
+          <div class="content-block">
+            <p>UUID: <span class="uuid"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/framework7.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
