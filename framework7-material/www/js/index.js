@@ -30,10 +30,9 @@ function initIndexPage() {
   $$('.uuid').html(device.uuid)
 }
 
-
-var isPhoneGap = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
+var isPhoneGap = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)
 if (isPhoneGap) {
-    document.addEventListener("deviceready", initIndexPage, false)
+  document.addEventListener("deviceready", initIndexPage, false)
 } else {
   var device = {
     cordova: 'N/A',
