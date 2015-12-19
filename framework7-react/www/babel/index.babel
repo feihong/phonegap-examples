@@ -1,0 +1,67 @@
+import React from 'react'
+
+
+export default class IndexPage extends React.Component {
+  render() {
+    return <div className="page-content">
+      <div className="content-block-title">Device details</div>
+      {this.renderDeviceInfoList()}
+      <div className="content-block-title">Device details</div>
+      {this.renderOtherPagesList()}
+      <div className="content-block">
+        <a href="#" className="button alert-button" onClick={this.handleClick.bind(this)}>For a good time, click me</a>
+      </div>
+    </div>
+  }
+  renderDeviceInfoList() {
+    return <div className="list-block accordion-list">
+      <ul>
+        {this.renderListItems()}
+        <li className="accordion-item">
+          <a href="#" className="item-link item-content">
+            <div className="item-inner">
+              <div className="item-title">More details</div>
+            </div>
+          </a>
+          <div className="accordion-item-content">
+            <div className="content-block">
+              <p><b>UUID</b>: {device.uuid}</p>
+              <p><b>User agent</b>: {navigator.userAgent}</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  }
+  renderListItems() {
+    let results = []
+    let info = this.props.deviceInfo
+    Object.keys(info).forEach((key) => {
+      results.push(<li key={key}>
+        <div className="item-content">
+          <div className="item-inner">
+            <div className="item-title">{key}</div>
+            <div className="item-after">{info[key]}</div>
+          </div>
+        </div>
+      </li>)
+    })
+    return results
+  }
+  renderOtherPagesList() {
+    return <div className="list-block">
+      <ul>
+        <li>
+          <a href="#speech" className="item-link item-content">
+            <div className="item-inner">
+              <div className="item-title">Speech</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  }
+  handleClick() {
+    this.props.app.alert('Sweet, you clicked my button, dude')
+  }
+}

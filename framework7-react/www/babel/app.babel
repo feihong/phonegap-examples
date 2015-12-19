@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import IndexPage from './index'
+import SpeechPage from './speech'
 
 
 let myApp = new Framework7({
@@ -9,54 +11,10 @@ let myApp = new Framework7({
 let deviceInfo = null
 
 myApp.addView('.view-main', {
-  dynamicNavbar: true
+  dynamicNavbar: true,
+  domCache: true,          //enable inline pages
 })
 
-class IndexPage extends React.Component {
-  render() {
-    return <div className="page-content">
-      <div className="content-block-title">Device details</div>
-      <div className="list-block accordion-list">
-        <ul>
-          {this.renderListItems()}
-          <li className="accordion-item">
-            <a href="#" className="item-link item-content">
-              <div className="item-inner">
-                <div className="item-title">More details</div>
-              </div>
-            </a>
-            <div className="accordion-item-content">
-              <div className="content-block">
-                <p><b>UUID</b>: {device.uuid}</p>
-                <p><b>User agent</b>: {navigator.userAgent}</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div className="content-block">
-        <a href="#" className="button alert-button" onClick={this.handleClick}>For a good time, click me</a>
-      </div>
-    </div>
-  }
-  renderListItems() {
-    let results = []
-    Object.keys(deviceInfo).forEach((key) => {
-      results.push(<li>
-        <div className="item-content">
-          <div className="item-inner">
-            <div className="item-title">{key}</div>
-            <div className="item-after">{deviceInfo[key]}</div>
-          </div>
-        </div>
-      </li>)
-    })
-    return results
-  }
-  handleClick() {
-    myApp.alert('Sweet you clicked my button dude')
-  }
-}
 
 function main() {
   deviceInfo = {
@@ -68,8 +26,12 @@ function main() {
   }
 
   ReactDOM.render(
-    <IndexPage />,
+    <IndexPage deviceInfo={deviceInfo} app={myApp} />,
     document.getElementById('index-page')
+  )
+  ReactDOM.render(
+    <SpeechPage />,
+    document.getElementById('speech-page')
   )
 }
 

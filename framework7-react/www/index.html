@@ -23,15 +23,24 @@
 <div class="views">
   <div class="view view-main">
     <div class="navbar">
-      <div class="navbar-inner">
+      <!-- Index navbar -->
+      <div class="navbar-inner" data-page="index">
         <div class="left">
           <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
         </div>
         <div class="center sliding">Framework7 React</div>
       </div>
+      <!-- Speech navbar -->
+      <div class="navbar-inner cached" data-page="speech">
+        <div class="left">
+          <a href="#index" class="back link"><i class="icon icon-back"></i><span>Back</span></a>
+        </div>
+        <div class="center">Speech</div>
+      </div>
     </div>
     <div class="pages navbar-through toolbar-through">
       <div id="index-page" data-page="index" class="page"></div>
+      <div id="speech-page" data-page="speech" class="page cached"></div>
     </div>
   </div>
 </div>

@@ -1,0 +1,13 @@
+import React from 'react'
+
+
+export default class SpeechPage extends React.Component {
+  render() {
+    return <div className="page-content">
+      <div className="content-block-title">Talk to me</div>
+      <div className="content-block">
+        <p>Todo</p>
+      </div>
+    </div>
+  }
+}
