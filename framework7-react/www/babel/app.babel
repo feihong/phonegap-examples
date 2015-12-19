@@ -12,12 +12,9 @@ myApp.addView('.view-main', {
   dynamicNavbar: true
 })
 
-class CoolApp extends React.Component {
-  componentDidMount() {
-
-  }
+class IndexPage extends React.Component {
   render() {
-    return <div>
+    return <div className="page-content">
       <div className="content-block-title">Device details</div>
       <div className="list-block accordion-list">
         <ul>
@@ -71,8 +68,8 @@ function main() {
   }
 
   ReactDOM.render(
-    <CoolApp />,
-    document.getElementById('react-content')
+    <IndexPage />,
+    document.getElementById('index-page')
   )
 }
 
