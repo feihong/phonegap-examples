@@ -1,13 +1,44 @@
 import React from 'react'
+import {BaseComponent} from '../../../lib/util'
 
 
-export default class SpeechPage extends React.Component {
+export default class SpeechPage extends BaseComponent {
+  constructor(props) {
+    super(props)
+    this.state = {message: ''}
+    this._bind('handleMessageChange', 'handleClick')
+  }
   render() {
     return <div className="page-content">
-      <div className="content-block-title">Talk to me</div>
+      <div className="list-block">
+        <ul>
+          <li>
+            <div className="item-content">
+              <div className="item-inner">
+                <div className="item-input">
+                  <input type="text" placeholder="Write something"
+                         value={this.state.message}
+                         onChange={this.handleMessageChange} />
+                </div>
+              </div>
+            </div>
+          </li>          
+        </ul>
+      </div>
       <div className="content-block">
-        <p>Todo</p>
+        <a href="#" className="button alert-button" onClick={this.handleClick.bind(this)}>Speak</a>
       </div>
     </div>
+  }
+  handleMessageChange(evt) {
+    this.setState({message: evt.target.value})
+  }
+  handleClick() {
+    let mesg = this.state.message.trim()
+    if (mesg) {
+      this.props.app.alert(`Speak "${mesg}"`)
+    } else {
+      this.props.app.alert('Nothing to say')
+    }
   }
 }

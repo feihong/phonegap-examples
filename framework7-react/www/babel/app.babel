@@ -30,7 +30,7 @@ function main() {
     document.getElementById('index-page')
   )
   ReactDOM.render(
-    <SpeechPage />,
+    <SpeechPage app={myApp} />,
     document.getElementById('speech-page')
   )
 }
