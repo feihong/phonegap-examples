@@ -1,0 +1,19 @@
+import React from 'react'
+import {BaseComponent} from '../../../lib/util'
+
+
+export default class GeoPage extends BaseComponent {
+  constructor(props) {
+    super(props)
+    this.state = {latitude: null, longitude: null}
+  }
+  render() {
+    return <div className="page-content">
+      <div className="content-block">
+        <div className="content-block-inner">
+          <p>Coordinates: {this.state.latitude}, {this.state.longitude}</p>
+        </div>
+      </div>
+    </div>
+  }
+}

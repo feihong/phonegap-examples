@@ -52,6 +52,13 @@ export default class IndexPage extends React.Component {
     return <div className="list-block">
       <ul>
         <li>
+          <a href="#geo" className="item-link item-content">
+            <div className="item-inner">
+              <div className="item-title">Geolocation</div>
+            </div>
+          </a>
+        </li>
+        <li>
           <a href="#speech" className="item-link item-content">
             <div className="item-inner">
               <div className="item-title">Speech</div>

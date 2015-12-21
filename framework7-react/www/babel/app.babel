@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import IndexPage from './index'
+import GeoPage from './geo'
 import SpeechPage from './speech'
 
 
@@ -28,6 +29,10 @@ function main() {
   ReactDOM.render(
     <IndexPage deviceInfo={deviceInfo} app={myApp} />,
     document.getElementById('index-page')
+  )
+  ReactDOM.render(
+    <GeoPage app={myApp} />,
+    document.getElementById('geo-page')
   )
   ReactDOM.render(
     <SpeechPage app={myApp} />,
