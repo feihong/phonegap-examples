@@ -11,7 +11,7 @@ const LABELS = new Map([
   ['altitudeAccuracy', 'Altitude accuracy'],
   ['heading', 'Heading'],
   ['speed', 'Speed'],
-  ['timestamp', 'Timestamp'],
+  // ['timestamp', 'Timestamp'],
 ])
 
 
@@ -30,12 +30,6 @@ export default class GeoPage extends BaseComponent {
       this.setState({coords: position.coords, timestamp: position.timestamp})
     }
     let handleError = (error) => {
-      // this.setState({
-      //   coords: {
-      //     latitude: 45.6,
-      //     longitude: 33.4,
-      //   }
-      // })
       this.setState({errorMessage: error.message})
     }
     navigator.geolocation.getCurrentPosition(handleSuccess, handleError)
@@ -59,7 +53,10 @@ export default class GeoPage extends BaseComponent {
   renderListItems() {
     let iter = wu(LABELS.entries()).map(pair => {
       let [prop, label] = pair
-      let value = (prop === 'timestamp') ? this.state.timestamp : this.state.coords[prop]
+      let value = this.state.coords[prop]
+      if (!value) {
+        value = 'N/A'
+      }
       return <li key={prop}>
         <div className="item-content">
           <div className="item-inner">

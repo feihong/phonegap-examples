@@ -3,7 +3,7 @@ import wu from 'wu'
 
 
 const OTHER_PAGES = new Map([
-  ['geo', 'Geolocaiton'],
+  ['geo', 'Geolocation'],
   ['speech', 'Speech'],
 ])
 
