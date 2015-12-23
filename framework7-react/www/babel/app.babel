@@ -17,19 +17,10 @@ myApp.addView('.view-main', {
 
 
 function main() {
-  deviceInfo = {
-    'Cordova version': device.cordova,
-    'Platform': device.platform,
-    'Device model': device.model,
-    'Platform version': device.version,
-    'Screen size': `${screen.width}×${screen.height}`,
-  }
-
   ReactDOM.render(
-    <IndexPage deviceInfo={deviceInfo} app={myApp} />,
+    <IndexPage app={myApp} />,
     document.getElementById('react-index')
   )
-
   initPage('geo', <GeoPage app={myApp} />)
   initPage('speech', <SpeechPage app={myApp} />)
 }

@@ -1,12 +1,29 @@
 import React from 'react'
+import wu from 'wu'
+
+
+const OTHER_PAGES = new Map([
+  ['geo', 'Geolocaiton'],
+  ['speech', 'Speech'],
+])
 
 
 export default class IndexPage extends React.Component {
+  constructor(props) {
+    super(props)
+    this.deviceInfo = new Map([
+      ['Cordova version', device.cordova],
+      ['Platform', device.platform],
+      ['Device model', device.model],
+      ['Platform version', device.version],
+      ['Screen size', `${screen.width}×${screen.height}`],
+    ])
+  }
   render() {
     return <div className="page-content">
       <div className="content-block-title">Device details</div>
       {this.renderDeviceInfoList()}
-      <div className="content-block-title">Device details</div>
+      <div className="content-block-title">Pages</div>
       {this.renderOtherPagesList()}
       <div className="content-block">
         <a href="#" className="button alert-button" onClick={this.handleClick.bind(this)}>For a good time, click me</a>
@@ -34,38 +51,32 @@ export default class IndexPage extends React.Component {
     </div>
   }
   renderListItems() {
-    let results = []
-    let info = this.props.deviceInfo
-    Object.keys(info).forEach((key) => {
-      results.push(<li key={key}>
+    let iter = wu(this.deviceInfo.entries()).map(pair => {
+      let [key, value] = pair
+      return <li key={key}>
         <div className="item-content">
           <div className="item-inner">
             <div className="item-title">{key}</div>
-            <div className="item-after">{info[key]}</div>
+            <div className="item-after">{value}</div>
           </div>
         </div>
-      </li>)
+      </li>
     })
-    return results
+    return [...iter]
   }
   renderOtherPagesList() {
+    let pagesIter = wu(OTHER_PAGES.entries()).map(pair => {
+      let [key, label] = pair
+      return <li key={key}>
+        <a href={key + '.html'} className="item-link item-content">
+          <div className="item-inner">
+            <div className="item-title">{label}</div>
+          </div>
+        </a>
+      </li>
+    })
     return <div className="list-block">
-      <ul>
-        <li>
-          <a href="geo.html" className="item-link item-content">
-            <div className="item-inner">
-              <div className="item-title">Geolocation</div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="speech.html" className="item-link item-content">
-            <div className="item-inner">
-              <div className="item-title">Speech</div>
-            </div>
-          </a>
-        </li>
-      </ul>
+      <ul>{[...pagesIter]}</ul>
     </div>
   }
   handleClick() {
