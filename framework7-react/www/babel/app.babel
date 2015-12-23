@@ -12,8 +12,7 @@ let myApp = new Framework7({
 let deviceInfo = null
 
 myApp.addView('.view-main', {
-  dynamicNavbar: true,
-  domCache: true,          //enable inline pages
+  dynamicNavbar: true
 })
 
 
@@ -30,19 +29,22 @@ function main() {
     <IndexPage deviceInfo={deviceInfo} app={myApp} />,
     document.getElementById('react-index')
   )
-  ReactDOM.render(
-    <GeoPage app={myApp} />,
-    document.getElementById('react-geo')
-  )
-  ReactDOM.render(
-    <SpeechPage app={myApp} />,
-    document.getElementById('react-speech')
-  )
+
+  initPage('geo', <GeoPage app={myApp} />)
+  initPage('speech', <SpeechPage app={myApp} />)
+}
+
+function initPage(pageName, reactComponent) {
+  let domId = 'react-' + pageName
+  myApp.onPageInit(pageName, () => {
+    ReactDOM.render(reactComponent, document.getElementById(domId))
+  })
 }
 
 if (window.isMobileDevice) {
   document.addEventListener('deviceready', main, false)
 } else {
+  // Stub data:
   window.device = {
     cordova: '666.66',
     platform: 'Browser',
