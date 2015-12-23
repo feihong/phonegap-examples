@@ -19,7 +19,7 @@ def serve(projectname):
 
 @task
 def build(projectname):
-    run("""browserify --extension=.babel \
+    run("""browserify --debug --extension=.babel \
       %(proj)s/www/babel/app.babel \
       -o %(proj)s/www/js/bundle.js \
       -t [ babelify --extensions .babel --presets [ es2015 react ] ]
@@ -28,7 +28,7 @@ def build(projectname):
 
 @task
 def watch(projectname):
-    run("""watchify --extension=.babel \
+    run("""watchify --debug --extension=.babel \
       %(proj)s/www/babel/app.babel \
       -o %(proj)s/www/js/bundle.js \
       -t [ babelify --extensions .babel --presets [ es2015 react ] ] \

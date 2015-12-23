@@ -1,18 +1,82 @@
 import React from 'react'
+import Lazy from 'lazy.js'
 import {BaseComponent} from '../../../lib/util'
+
+
+const LABELS = new Map([
+  ['latitude', 'Latitude'],
+  ['longitude', 'Longitude'],
+  ['altitude', 'Altitude'],
+  ['accuracy', 'Accuracy'],
+  ['altitudeAccuracy', 'Altitude accuracy'],
+  ['heading', 'Heading'],
+  ['speed', 'Speed'],
+  ['timestamp', 'Timestamp'],
+])
 
 
 export default class GeoPage extends BaseComponent {
   constructor(props) {
     super(props)
-    this.state = {latitude: null, longitude: null}
+    this.state = {coords: null, timestamp: null, errorMessage: null}
+    this._bind('handlePageInit')
+  }
+  componentDidMount() {
+    this.props.app.onPageInit('geo', this.handlePageInit)
+    this.props.app.onPageReinit('geo', this.handlePageInit)
+  }
+  handlePageInit() {
+    let handleSuccess = (position) => {
+      this.setState({coords: position.coords, timestamp: position.timestamp})
+    }
+    let handleError = (error) => {
+      // this.setState({
+      //   coords: {
+      //     latitude: 45.6,
+      //     longitude: 33.4,
+      //   }
+      // })
+      this.setState({errorMessage: error.message})
+    }
+    navigator.geolocation.getCurrentPosition(handleSuccess, handleError)
   }
   render() {
     return <div className="page-content">
-      <div className="content-block">
-        <div className="content-block-inner">
-          <p>Coordinates: {this.state.latitude}, {this.state.longitude}</p>
+      {this.renderList()}
+      {this.renderErrorMessage()}
+    </div>
+  }
+  renderList() {
+    if (!this.state.coords) {
+      return
+    }
+    return <div className="list-block">
+      <ul>
+        {this.renderListItems()}
+      </ul>
+    </div>
+  }
+  renderListItems() {
+    return Lazy([...LABELS.entries()]).map(pair => {
+      let [prop, label] = pair
+      let value = (prop === 'timestamp') ? this.state.timestamp : this.state.coords[prop]
+      return <li key={prop}>
+        <div className="item-content">
+          <div className="item-inner">
+            <div className="item-title">{label}</div>
+            <div className="item-after">{value}</div>
+          </div>
         </div>
+      </li>
+    }).toArray()
+  }
+  renderErrorMessage() {
+    if (!this.state.errorMessage) {
+      return
+    }
+    return <div className="content-block">
+      <div className="content-block-inner">
+        <b>Error</b>: {JSON.stringify(this.state.errorMessage)}
       </div>
     </div>
   }
