@@ -28,15 +28,15 @@ function main() {
 
   ReactDOM.render(
     <IndexPage deviceInfo={deviceInfo} app={myApp} />,
-    document.getElementById('index-page')
+    document.getElementById('react-index')
   )
   ReactDOM.render(
     <GeoPage app={myApp} />,
-    document.getElementById('geo-page')
+    document.getElementById('react-geo')
   )
   ReactDOM.render(
     <SpeechPage app={myApp} />,
-    document.getElementById('speech-page')
+    document.getElementById('react-speech')
   )
 }
 
