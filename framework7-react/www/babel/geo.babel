@@ -1,5 +1,5 @@
 import React from 'react'
-import Lazy from 'lazy.js'
+import wu from 'wu'
 import {BaseComponent} from '../../../lib/util'
 
 
@@ -57,7 +57,7 @@ export default class GeoPage extends BaseComponent {
     </div>
   }
   renderListItems() {
-    return Lazy([...LABELS.entries()]).map(pair => {
+    let iter = wu(LABELS.entries()).map(pair => {
       let [prop, label] = pair
       let value = (prop === 'timestamp') ? this.state.timestamp : this.state.coords[prop]
       return <li key={prop}>
@@ -68,7 +68,8 @@ export default class GeoPage extends BaseComponent {
           </div>
         </div>
       </li>
-    }).toArray()
+    })
+    return [...iter]
   }
   renderErrorMessage() {
     if (!this.state.errorMessage) {
