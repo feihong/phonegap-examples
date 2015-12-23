@@ -40,8 +40,7 @@ function main() {
   )
 }
 
-let isPhoneGap = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) !== null
-if (isPhoneGap) {
+if (window.isMobileDevice) {
   document.addEventListener('deviceready', main, false)
 } else {
   window.device = {
